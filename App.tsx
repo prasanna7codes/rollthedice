@@ -54,7 +54,11 @@ function App(): React.JSX.Element {
   
   const changeImage = () => {
     console.log('pressed');
-    setImageSource(require('./image/me_recent.jpg'));
+    setImageSource((prevImage: any) =>
+      prevImage === require('./image/formal_me.jpg')
+        ? require('./image/me_recent.jpg')
+        : require('./image/formal_me.jpg')
+    );
   }
 
 
