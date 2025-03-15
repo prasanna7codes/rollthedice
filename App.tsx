@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React,{ useState } from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -44,15 +44,26 @@ const showAlert = () =>
   );
 
 
+
+  
+
+
 function App(): React.JSX.Element {
+
+  const [imageSource, setImageSource] = useState(require('./image/formal_me.jpg'));
+  
+  const changeImage = () => {
+    console.log('pressed');
+    setImageSource(require('./image/me_recent.jpg'));
+  }
 
 
   return (
     <>
     <Text>hello</Text>
     <View style={styles.sectionContainer}>
-    <Image source={require('./image/formal_me.jpg')} style={styles.image}  />
-    <Button title="Press me" onPress={showAlert} />
+    <Image source={imageSource} style={styles.image}  />
+    <Button title="Press me" onPress={changeImage} />
 
     </View>
     </>
@@ -60,20 +71,7 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-   
+
   sectionContainer: {
     flex:1,
     justifyContent: 'center',
