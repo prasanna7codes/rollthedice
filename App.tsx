@@ -14,13 +14,34 @@ import {
   useColorScheme,
   View,
   Image,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 
 
 
 
-
+const showAlert = () =>
+  Alert.alert(
+    'Alert Title',
+    'learning to use alert',
+    [
+      {
+        text: 'Cancel',
+        //onPress: () => Alert.alert('Cancel Pressed'),
+        style: 'cancel',
+      },
+    ],
+    {
+      cancelable: true,
+      onDismiss: () =>
+        Alert.alert(
+          'This alert was dismissed by tapping outside of the alert dialog.',
+        ),
+    },
+    
+  
+  );
 
 
 function App(): React.JSX.Element {
@@ -31,7 +52,7 @@ function App(): React.JSX.Element {
     <Text>hello</Text>
     <View style={styles.sectionContainer}>
     <Image source={require('./image/formal_me.jpg')} style={styles.image}  />
-    <Button title="Press me" onPress={() => {}} />
+    <Button title="Press me" onPress={showAlert} />
 
     </View>
     </>
