@@ -16,7 +16,9 @@ import {
   Image,
   Button,
   Alert,
-  ImageSourcePropType
+  ImageSourcePropType,
+  Appearance,
+  useColorScheme
 } from 'react-native';
 
 
@@ -45,18 +47,18 @@ const showAlert = () =>
   );
 
 
-  import DiceOne from '../assets/One.png';
-  import DiceTwo from '../assets/Two.png';
-  import DiceThree from '../assets/Three.png';
-  import DiceFour from '../assets/Four.png';
-  import DiceFive from '../assets/Five.png';
-  import DiceSix from '../assets/Six.png';
+  import DiceOne from '../assests/One.png';
+  import DiceTwo from '../assests/Two.png';
+  import DiceThree from '../assests/Three.png';
+  import DiceFour from '../assests/Four.png';
+  import DiceFive from '../assests/Five.png';
+  import DiceSix from '../assests/Six.png';
 
   type DiceProps = PropsWithChildren<{
     imageUrl:ImageSourcePropType
   }>
    
-  const Dice = (imageUrl:any) => {
+  const Dice = ({imageUrl}: DiceProps):JSX.Element => {
     return (
       <View>
         <Image style={styles.diceImage} source={imageUrl} />
@@ -65,14 +67,26 @@ const showAlert = () =>
   }
 
 function App(): React.JSX.Element {
+  const [diceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne);
 
   
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
+  
+  const containerStyle = {
+    ...styles.container,
+    backgroundColor: isDarkMode ? '#121212' : '#FFF2F2', // Dark or light background
+  };
 
+  const textStyle = {
+    color: isDarkMode ? '#FFFFFF' : '#000000', // Dark or light text
+  };
 
   return (
-    <>
-    <Text>HELLO</Text>
-    </>
+    <View style={containerStyle}>
+    <Text style={textStyle}>Hello</Text>
+    <Dice imageUrl={diceImage} />
+  </View>
     
   );
 }
