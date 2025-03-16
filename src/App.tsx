@@ -18,7 +18,8 @@ import {
   Alert,
   ImageSourcePropType,
   Appearance,
-  useColorScheme
+  useColorScheme,
+  Pressable
 } from 'react-native';
 
 
@@ -69,23 +70,49 @@ const showAlert = () =>
 function App(): React.JSX.Element {
   const [diceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne);
 
-  
-  const colorScheme = useColorScheme();
-  const isDarkMode = colorScheme === 'dark';
-  
-  const containerStyle = {
-    ...styles.container,
-    backgroundColor: isDarkMode ? '#121212' : '#FFF2F2', // Dark or light background
-  };
+  const rollDiceonTap = () => {
+    const randomNumber = Math.floor(Math.random() * 6) + 1;
 
-  const textStyle = {
-    color: isDarkMode ? '#FFFFFF' : '#000000', // Dark or light text
-  };
+    switch (randomNumber) {
+      case 1:
+        setDiceImage(DiceOne)
+        break;
+      case 2:
+        setDiceImage(DiceTwo)
+        break;
+      case 3:
+        setDiceImage(DiceThree)
+        break;
+      case 4:
+        setDiceImage(DiceFour)
+        break;
+      case 5:
+        setDiceImage(DiceFive)
+        break;
+      case 6:
+        setDiceImage(DiceSix)
+        break;
+    
+      default:
+        setDiceImage(DiceOne)
+        break;
+  }
+}
 
   return (
-    <View style={containerStyle}>
-    <Text style={textStyle}>Hello</Text>
+    <View style={styles.container}>
     <Dice imageUrl={diceImage} />
+
+    <Pressable
+      onPress={rollDiceonTap}
+      >
+        <Text
+        style={styles.rollDiceBtnText}
+        >
+        Roll the dice
+        </Text>
+      </Pressable>
+
   </View>
     
   );
@@ -96,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFF2F2',
+    backgroundColor: 'black',
   },
   diceContainer: {
     margin: 12,
@@ -110,7 +137,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderWidth: 2,
     borderRadius: 8,
-    borderColor: '#E5E0FF',
+    borderColor: 'red',
     fontSize: 16,
     color: '#8EA7E9',
     fontWeight: '700',
