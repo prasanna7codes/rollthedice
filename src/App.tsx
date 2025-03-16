@@ -22,6 +22,7 @@ import {
   Pressable
 } from 'react-native';
 
+import { trigger } from 'react-native-haptic-feedback';
 
 
 
@@ -55,9 +56,19 @@ const showAlert = () =>
   import DiceFive from '../assests/Five.png';
   import DiceSix from '../assests/Six.png';
 
+ 
+  const options = {
+    enableVibrateFallback: true,
+    ignoreAndroidSystemSettings: false,
+  };
+ 
+
+
   type DiceProps = PropsWithChildren<{
     imageUrl:ImageSourcePropType
   }>
+
+
    
   const Dice = ({imageUrl}: DiceProps):JSX.Element => {
     return (
@@ -97,6 +108,9 @@ function App(): React.JSX.Element {
         setDiceImage(DiceOne)
         break;
   }
+
+  trigger('impactLight', options);
+
 }
 
   return (
