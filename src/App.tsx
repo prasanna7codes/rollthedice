@@ -56,7 +56,7 @@ const showAlert = () =>
     imageUrl:ImageSourcePropType
   }>
    
-  const Dice = ({imageUrl}: DiceProps):JSX.Element => {
+  const Dice = (imageUrl:any) => {
     return (
       <View>
         <Image style={styles.diceImage} source={imageUrl} />
